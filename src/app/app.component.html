@@ -333,4 +333,18 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
+<div *appHasRole="isVisible">
+  <ul>
+    <li>Admin</li>
+    <li>SuperAdmin</li>
+    <li>NormalUser</li>
+  </ul>
+</div>
+
+<div>
+  <button (click)="toggleVisibility()">
+    {{buttonLabel}}
+  </button>
+</div>
+
 <router-outlet />

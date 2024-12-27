@@ -4,7 +4,7 @@ import { FPSGameComponent } from './ModuleDataTransferBetweenComponents/fpsgame/
 import { CalculatorComponent } from './CalculationApp/calculator/calculator.component';
 
 export const routes: Routes = [
-    {path: '',component:CalculatorComponent}
+    //{path: '',component:CalculatorComponent}
     //{path: 'game',component:GameComponent},
     //{path: 'fpsgame' ,component:FPSGameComponent}
 ];
