@@ -1,0 +1,23 @@
+<p>calculator works!</p>
+
+<div>
+    
+</div>
+
+<app-input (numberChanged)="onNumberChanged($event)"></app-input>
+
+<div>
+    <h1>Received Numbers:</h1>
+    <p>Numnber 1: {{receivedNumber.num1}}</p>
+    <p>Numnber 2: {{receivedNumber.num2}}</p>
+</div>
+<br>
+<br>
+
+<div>
+    <h1>Results:</h1>
+    <p>Addition: {{result.addition}}</p>
+    <p>Subtraction: {{result.subtraction}}</p>
+    <p>Multiplication:{{result.multiplication}}</p>
+    <p>Division: {{result.division}}</p>
+</div>
