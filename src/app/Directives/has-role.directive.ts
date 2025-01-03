@@ -11,6 +11,7 @@ export class HasRoleDirective {
 
   @Input('appHasRole') set hasRoleVisibility(condition:boolean){
     console.log('Conditon: ',condition);
+    console.log('hasRole',this.hasRole);
     if(condition && !this.hasRole){
       this.viewContainer.createEmbeddedView(this.templateRef);
       this.hasRole=true;

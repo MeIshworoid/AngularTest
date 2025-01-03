@@ -1,0 +1,73 @@
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Game Title</th>
+                <th>Publisher</th>
+                <th>Genre</th>
+                <th>Released On</th>
+                <th>Got Game of the Year Title On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let game of gameData">
+                <td>{{game.gameTitle}}</td>
+                <td>{{game.publisher}}</td>
+                <td>{{game.genre}}</td>
+                <td>{{game.releasedDate}}</td>
+                <td>{{game.gotGameOfTheYearTitleOn}}</td>
+                <td><button (click)="viewGameDetails(game)" class="view-btn"><i class="fas fa-eye"></i> View</button></td>
+            </tr>
+            <!-- <tr>
+                <td>Sekiro: Shadows Die Twice</td>
+                <td>Activision</td>
+                <td>Action-Adventure</td>
+                <td>March 22, 2019</td>
+                <td>2019</td>
+                <td><button class="view-btn"><i class="fas fa-eye"></i> View</button></td>
+            </tr>
+            <tr>
+                <td>The Last of Us Part II</td>
+                <td>Sony Interactive Entertainment</td>
+                <td>Action-Adventure</td>
+                <td>June 19, 2020</td>
+                <td>2020</td>
+                <td><button class="view-btn"><i class="fas fa-eye"></i> View</button></td>
+            </tr>
+            <tr>
+                <td>It Takes Two</td>
+                <td>Electronic Arts</td>
+                <td>Action-Adventure, Puzzle</td>
+                <td>March 26, 2021</td>
+                <td>2021</td>
+                <td><button class="view-btn"><i class="fas fa-eye"></i> View</button></td>
+            </tr>
+            <tr>
+                <td>Elden Ring</td>
+                <td>BANDAI NAMCO Entertainment</td>
+                <td>Action-RPG</td>
+                <td>February 25, 2022</td>
+                <td>2022</td>
+                <td><button class="view-btn"><i class="fas fa-eye"></i> View</button></td>
+            </tr>
+            <tr>
+                <td>The Legend of Zelda: Tears of the Kingdom</td>
+                <td>Nintendo</td>
+                <td>Action-Adventure</td>
+                <td>May 12, 2023</td>
+                <td>2023</td>
+                <td><button class="view-btn"><i class="fas fa-eye"></i> View</button></td>
+            </tr>
+            <tr>
+                <td>Baldur's Gate 3</td>
+                <td>Larian Studios</td>
+                <td>Role-Playing</td>
+                <td>August 3, 2023</td>
+                <td>2024</td>
+                <td><button class="view-btn"><i class="fas fa-eye"></i> View</button></td>
+            </tr> -->
+        </tbody>
+    </table>
+</div>

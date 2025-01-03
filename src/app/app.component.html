@@ -333,7 +333,7 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-<div *appHasRole="isVisible">
+<!-- <div *appHasRole="isVisible">
   <ul>
     <li>Admin</li>
     <li>SuperAdmin</li>
@@ -345,6 +345,15 @@
   <button (click)="toggleVisibility()">
     {{buttonLabel}}
   </button>
-</div>
+</div> -->
+
+<nav>
+  <ul>
+    <li><a routerLink="/inputgamedata" routerLinkActive="active">Input Game Data</a></li>
+    <li><a routerLink="/gamedata" routerLinkActive="active">Game Data</a></li>
+  </ul>
+</nav>
+
+<h1>{{heading}}</h1>
 
 <router-outlet />

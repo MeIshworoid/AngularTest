@@ -1,0 +1,33 @@
+<div>
+    <h2>Enter Game Details</h2>
+    <form (ngSubmit)="onSubmit()">
+      <label>Game Title:</label>
+      <input type="text" [(ngModel)]="game.gameTitle" [ngModelOptions]="{standalone: true}" required />
+  
+      <label>Publisher:</label>
+      <select [(ngModel)]="game.publisher" [ngModelOptions]="{standalone: true}" required>
+        <option value="" disabled selected>---Select Publisher---</option>
+        <option value="Activision">Activision</option>
+        <option value="Sony Interactive Entertainment">Sony Interactive Entertainment</option>
+        <option value="Electronic Arts">Electronic Arts</option>
+        <option value="BANDAI NAMCO Entertainment">BANDAI NAMCO Entertainment</option>
+        <option value="Nintendo">Nintendo</option>
+        <option value="Larian Studios">Larian Studios</option>
+      </select>
+  
+      <label>Genre:</label>
+      <input type="text" [(ngModel)]="game.genre" [ngModelOptions]="{standalone: true}" required />
+  
+      <label>Release Date:</label>
+      <input type="date" [(ngModel)]="game.releasedDate" [ngModelOptions]="{standalone: true}" [value]="formattedReleaseDate"/>
+  
+      <label>Game of the Year Of:</label>
+      <select [(ngModel)]="game.gotGameOfTheYearTitleOn" [ngModelOptions]="{standalone: true}" required>
+        <option value="" disabled selected>---Select Year---</option>
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+  
+      <button type="submit">Add Game</button>
+    </form>
+  </div>
+  

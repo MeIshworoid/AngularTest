@@ -1,0 +1,13 @@
+<div *ngIf="game">
+    <h2>{{ game.gameTitle }} - Game of the Year: {{ game.gotGameOfTheYearTitleOn }}</h2>
+    
+    <!-- Display game image using static URL -->
+    <img src="https://wallpaperaccess.com/full/7994810.jpg" alt="{{ game.gameTitle }} Image" width="300px" />
+  
+    <p><strong>Publisher:</strong> {{ game.publisher }}</p>
+    <p><strong>Genre:</strong> {{ game.genre }}</p>
+    <p><strong>Release Date:</strong> {{ game.releasedDate}}</p>
+  
+    <h3>Game Description</h3>
+    <p>This is a static description for the game {{ game.gameTitle }}. It is a thrilling experience that transports players to a fantastical world filled with adventure. The game has received accolades for its immersive gameplay and captivating storyline.</p>
+  </div>
