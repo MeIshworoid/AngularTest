@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 //import { HasRoleDirective } from './Directives/has-role.directive';
 import { filter } from 'rxjs';

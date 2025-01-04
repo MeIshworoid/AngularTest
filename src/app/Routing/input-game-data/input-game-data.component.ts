@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { GameData } from '../Models/GameData';
-import { GameDataService } from '../game-data.service';
+import { GameDataService } from '../Service/game-data.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
@@ -27,14 +27,15 @@ export class InputGameDataComponent {
   years:number[] =[];
 
   constructor(private gameDataService:GameDataService,
-    private datePipe:DatePipe){
+    private datePipe:DatePipe,
+    private toastr:ToastrService){
     this.generateYears();
   }
 
   onSubmit(){
     console.log("Form Submit Clicked...");
     this.gameDataService.addGameData(this.game);
-    //this.toastr.success("Game Data Added Successfully.");
+    this.toastr.success("Game Data Added Successfully.","Success",{closeButton:true,timeOut:1000,positionClass:'toast-bottom-right'});
     this.resetGameData();    
   }
 
