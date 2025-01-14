@@ -10,8 +10,12 @@ export const routes: Routes = [
     //{path: '',component:CalculatorComponent}
     //{path: 'game',component:GameComponent},
     //{path: 'fpsgame' ,component:FPSGameComponent}
-    {path:'inputgamedata',component:InputGameDataComponent},
-    {path:'gamedata',component:GameDataComponent},
-    {path:'gamedetails',component:GameDetailsComponent},
-    { path: '', redirectTo: '/inputgamedata', pathMatch: 'full' }
+    // {path:'inputgamedata',component:InputGameDataComponent},
+    // {path:'gamedata',component:GameDataComponent},
+    // {path:'gamedetails',component:GameDetailsComponent},
+    // { path: '', redirectTo: '/inputgamedata', pathMatch: 'full' }
+{
+    path: '',
+    loadChildren: () => import('./Template Driven Form/module/tdf.module').then(m => m.TDFModule) //lazy loading
+}
 ];

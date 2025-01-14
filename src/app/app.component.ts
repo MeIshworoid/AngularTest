@@ -3,13 +3,14 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 //import { HasRoleDirective } from './Directives/has-role.directive';
 import { filter } from 'rxjs';
+import { TDFModule } from './Template Driven Form/module/tdf.module';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
+    //RouterLink,
+    //RouterLinkActive,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

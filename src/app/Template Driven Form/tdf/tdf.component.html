@@ -1,0 +1,124 @@
+
+<div class="container mt-5">
+  <h2>Template Driven Form</h2>
+
+  <form #formData="ngForm" (ngSubmit)="onSubmit(formData)" novalidate>
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input
+        type="text"
+        id="fullName"
+        name="fullName"
+        [(ngModel)]="fullName"
+        required
+        minlength="5"
+        class="form-control"
+      />
+
+      <!-- Here error occurs because form control is accessed before it is fully initialized...
+      Use ?. in templates when accessing properties that may not be immediately available. -->
+      <!-- We should use property index for strictly type checking
+      This can be enabled or disabled by setting true or false for the strictTemplates key in angularCompilerOptions -->
+      <!-- <div *ngIf="formData.controls.fullName.touched && formData.controls.fullName.invalid" class="text-danger">
+        <span *ngIf="formData.controls.fullName.errors?.required">Full Name is required.</span>
+        <span *ngIf="formData.controls.fullName.errors?.minlength">
+          Full Name must be at least 5 characters long.
+        </span>
+      </div> -->
+      <div
+        *ngIf="formData?.controls?.['fullName']?.touched && formData?.controls?.['fullName']?.invalid"
+        class="text-danger"
+      >
+        <span *ngIf="formData?.controls?.['fullName']?.errors?.['required']">
+          Full Name is required.
+        </span>
+        <span *ngIf="formData?.controls?.['fullName']?.errors?.['minlength']">
+          Full Name must be at least 5 characters long.
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address1">Address 1</label>
+      <input
+        type="text"
+        id="address1"
+        name="address1"
+        [(ngModel)]="address1"
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input
+        type="text"
+        id="phone"
+        name="phone"
+        [(ngModel)]="phone"
+        pattern="^[0-9]{10}$"
+        class="form-control"
+      />
+      <div
+        *ngIf="formData?.controls?.['phone']?.touched && formData?.controls?.['phone']?.invalid"
+        class="text-danger"
+      >
+        <small *ngIf="formData?.controls?.['phone']?.errors?.['pattern']">
+          Phone Number must be 10 digits.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input
+        type="number"
+        id="age"
+        name="age"
+        [(ngModel)]="age"
+        min="18"
+        max="100"
+        class="form-control"
+      />
+      <div
+        *ngIf="formData?.controls?.['age']?.touched && formData?.controls?.['age']?.invalid"
+        class="text-danger"
+      >
+        <small *ngIf="formData?.controls?.['age']?.errors?.['min']">
+          Age must be at least 18.
+        </small>
+        <small *ngIf="formData?.controls?.['age']?.errors?.['max']">
+          Age must be less than or equal to 100.
+        </small>
+      </div>
+    </div>
+
+    <div *ngIf="formData?.controls?.['address1']?.value" class="form-group">
+      <label for="district">District</label>
+      <input
+        type="text"
+        id="district"
+        name="district"
+        [(ngModel)]="district"
+        required
+        class="form-control"
+      />
+      <div
+        *ngIf="formData?.controls?.['district']?.touched && formData?.controls?.['district']?.invalid"
+        class="text-danger"
+      >
+        <small *ngIf="formData?.controls?.['district']?.errors?.['required']">
+          District is required when Address 1 is filled.
+        </small>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary mt-2"
+      [disabled]="formData.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
