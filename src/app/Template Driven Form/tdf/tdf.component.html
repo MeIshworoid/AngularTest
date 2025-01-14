@@ -63,9 +63,9 @@
         *ngIf="formData?.controls?.['phone']?.touched && formData?.controls?.['phone']?.invalid"
         class="text-danger"
       >
-        <small *ngIf="formData?.controls?.['phone']?.errors?.['pattern']">
+        <span *ngIf="formData?.controls?.['phone']?.errors?.['pattern']">
           Phone Number must be 10 digits.
-        </small>
+        </span>
       </div>
     </div>
 
@@ -84,12 +84,12 @@
         *ngIf="formData?.controls?.['age']?.touched && formData?.controls?.['age']?.invalid"
         class="text-danger"
       >
-        <small *ngIf="formData?.controls?.['age']?.errors?.['min']">
+        <span *ngIf="formData?.controls?.['age']?.errors?.['min']">
           Age must be at least 18.
-        </small>
-        <small *ngIf="formData?.controls?.['age']?.errors?.['max']">
+        </span>
+        <span *ngIf="formData?.controls?.['age']?.errors?.['max']">
           Age must be less than or equal to 100.
-        </small>
+        </span>
       </div>
     </div>
 
@@ -107,16 +107,17 @@
         *ngIf="formData?.controls?.['district']?.touched && formData?.controls?.['district']?.invalid"
         class="text-danger"
       >
-        <small *ngIf="formData?.controls?.['district']?.errors?.['required']">
+        <span *ngIf="formData?.controls?.['district']?.errors?.['required']">
           District is required when Address 1 is filled.
-        </small>
+        </span>
       </div>
     </div>
 
+    <!--[disabled]="formData.invalid"  for disabling submit button if form is not valid...-->
     <button
       type="submit"
       class="btn btn-primary mt-2"
-      [disabled]="formData.invalid"
+      [disabled]="formData.invalid" 
     >
       Submit
     </button>

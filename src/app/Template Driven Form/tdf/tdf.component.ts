@@ -20,7 +20,12 @@ export class TdfComponent {
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      console.log('Form Submitted!', this.fullName,this.address1,this.phone,this.age,this.district);
+      console.log('Form Submitted!', 
+        'Full Name: ',this.fullName,
+        'Address: ',this.address1,
+        'Phone Number: ',this.phone,
+        'Age: ',this.age,
+        'District:',this.district);
       this.toastr.success("Form Submitted Successfully.","Success",{closeButton:true,timeOut:1000,positionClass:'toast-bottom-right'});
     } else {
       console.log('Form is not valid');
