@@ -38,3 +38,19 @@ nav {
     color: #4CAF50;
   }
   
+.disabled-link {
+  color: gray;
+  pointer-events: none; 
+  text-decoration: none;
+}
+
+p {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+p:hover {
+  color: #4CAF50;
+}
+

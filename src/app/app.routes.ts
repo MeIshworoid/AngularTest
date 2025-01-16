@@ -5,17 +5,20 @@ import { CalculatorComponent } from './CalculationApp/calculator/calculator.comp
 import { GameDataComponent } from './Routing/game-data/game-data.component';
 import { InputGameDataComponent } from './Routing/input-game-data/input-game-data.component';
 import { GameDetailsComponent } from './Routing/game-details/game-details.component';
+import { LoginFormComponent } from './Routing/login-form/login-form.component';
+import { authGuard } from './Routing/Gaurd/auth.guard';
 
 export const routes: Routes = [
     //{path: '',component:CalculatorComponent}
     //{path: 'game',component:GameComponent},
     //{path: 'fpsgame' ,component:FPSGameComponent}
-    // {path:'inputgamedata',component:InputGameDataComponent},
-    // {path:'gamedata',component:GameDataComponent},
-    // {path:'gamedetails',component:GameDetailsComponent},
-    // { path: '', redirectTo: '/inputgamedata', pathMatch: 'full' }
-{
-    path: '',
-    loadChildren: () => import('./Template Driven Form/module/tdf.module').then(m => m.TDFModule) //lazy loading
-}
+    {path:'inputgamedata',component:InputGameDataComponent,canActivate:[authGuard]},
+    {path:'gamedata',component:GameDataComponent},
+    {path:'gamedetails',component:GameDetailsComponent},
+    {path:'loginForm',component:LoginFormComponent},
+    { path: '', redirectTo: '/loginForm', pathMatch: 'full' }
+// {
+//     path: '',
+//     loadChildren: () => import('./Template Driven Form/module/tdf.module').then(m => m.TDFModule) //lazy loading
+// }
 ];
