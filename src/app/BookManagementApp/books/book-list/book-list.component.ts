@@ -1,20 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../../models/book';
-import { BookService } from '../../service/book.service';
+import { BookService } from '../../services/book.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-book-list',
-  imports: [],
   templateUrl: './book-list.component.html',
-  styleUrl: './book-list.component.scss'
+  styleUrl: './book-list.component.scss',
+  standalone: false
 })
 export class BookListComponent implements OnInit {
 
   books: Book[] = [];
 
-  constructor(private bookService: BookService) { }
+  constructor(
+    private bookService: BookService,
+    private router:Router,
+    private toastr:ToastrService
+  ) { }
 
   ngOnInit(): void {
-    this.bookService.books$.subscribe((books) => (this.books = books));
+    this.books = this.bookService.getBooks();
+  }
+
+  viewDetails(id:number):void{
+    this.router.navigate(['/bookDetail',id]);
+  }
+
+  updateBook(id:number):void{
+    this.router.navigate(['/updateBook',id]);
+  }
+  
+  deleteBook(id:number):void{
+    this.bookService.deleteBookByID(id);
+    this.toastr.success('Book deleted successfully.', 'Success', {
+      closeButton:
+        true, timeOut: 1500
+    });
+    this.router.navigate(['/bookList'])
   }
 }

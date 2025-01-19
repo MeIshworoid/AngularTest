@@ -1,1 +1,24 @@
-<p>book-detail works!</p>
+<h2 class="text-center my-4">Book Details</h2>
+<div class="container">
+  <div class="card shadow-sm">
+    <div class="card-body" *ngIf="book">
+      <p><span class="fw-bold">Name:</span> {{ book.name }}</p>
+      <p><span class="fw-bold">Authors:</span> {{ book.authors.join(', ') }}</p>
+      <p>
+        <span class="fw-bold">Price (NPR):</span> {{ book.priceForNepal }}
+      </p>
+      <p>
+        <span class="fw-bold">Price (INR):</span> {{ book.priceForIndia }}
+      </p>
+      <p>
+        <span class="fw-bold">Publication:</span> {{ book.publication }}
+      </p>
+    </div>
+    <div class="card-footer text-center">
+      <small class="text-muted">Book details from Book List</small>
+    </div>
+  </div>
+  <div class="text-center mt-4">
+    <button class="btn btn-secondary" routerLink="/bookList">Go Back</button>
+  </div>
+</div>

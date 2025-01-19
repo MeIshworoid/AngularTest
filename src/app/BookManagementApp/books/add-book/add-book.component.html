@@ -1,18 +1,69 @@
-<h2>Add a New Book</h2>
-<form [formGroup]="bookForm" (ngSubmit)="onsubmit()">
-<label>Name:</label>
-<input formControlName="name" />
-<div *ngIf="bookForm.get('name')?.touched && bookForm.get('name')?.invalid">
-Name is required.
+<div class="container my-4">
+  <h2 class="mb-4 text-center">Add a New Book</h2>
+  <form [formGroup]="addbookForm" (ngSubmit)="submit()" class="needs-validation" novalidate>
+    <div class="row mb-3">
+      <div class="col-12">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" formControlName="name" class="form-control" />
+        <div *ngIf="addbookForm.get('name')?.touched && addbookForm.get('name')?.invalid" class="text-danger mt-1">
+          Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <label class="form-label">Authors:</label>
+        <div formArrayName="authors">
+          <div *ngFor="let author of authors.controls; let i = index" class="d-flex align-items-center mb-2">
+            <input [formControlName]="i" class="form-control me-2" />
+            <button type="button" class="btn btn-danger btn-sm" (click)="removeAuthor(i)">Remove</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm mt-2" (click)="addAuthor()">Add Author</button>
+        <div *ngIf="isAuthorInvalid()" class="text-danger mt-1">
+          At least one author is required.
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-3">
+      <div class="col-12">
+        <label for="priceForNepal" class="form-label">Price (NPR):</label>
+        <input type="text" id="priceForNepal" formControlName="priceForNepal" class="form-control" />
+        <div *ngIf="addbookForm.get('priceForNepal')?.invalid" class="text-danger mt-1">
+          Invalid NPR price.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <label for="priceForIndia" class="form-label">Price (INR):</label>
+        <input type="text" id="priceForIndia" formControlName="priceForIndia" class="form-control" />
+        <div *ngIf="addbookForm.get('priceForIndia')?.invalid" class="text-danger mt-1">
+          Invalid INR price.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <label for="publication" class="form-label">Publication:</label>
+        <input type="text" id="publication" formControlName="publication" class="form-control" />
+        <!-- <div *ngIf="addbookForm.get('publication')?.invalid" class="text-danger mt-1">
+          Invalid characters in publication.
+        </div> -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-auto">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-secondary" routerLink="/bookList">Go Back</button>
+      </div>
+    </div>
+  </form>
 </div>
-<label>Authors:</label>
-<div formArrayName="authors">
-<div *ngFor="let author of authors.controls; let i = index">
-<input [formControlName]="i" />
-<button type="button" (click)="removeAuthor(i)">Remove</button>
-</div>
-<button type="button" (click)="addAuthor()">Add Author</button>
-</div>
-<div *ngIf="authors.invalid">At least one author is required.</div>
-<label>Price (NPR):</label>
-<input formControlName="priceForNepal" />

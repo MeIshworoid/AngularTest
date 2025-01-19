@@ -16,16 +16,29 @@ export class BookService {
 
   constructor(){}
 
-  getBooks():void
+  getBooks():Book[]{
+    return this.books;
+  }
 
   addBook(book: Book): void {
-    book.id = this.books.length + 1;
     this.books.push(book);
-    this.booksSubject.next(this.books);
   }
 
   getBookByID(id: number): Book | undefined {
     return this.books.find((book) => book.id === id);
+  }
+
+  updateBookByID(id: number, updatedBook: Partial<Book>): void {
+    this.books.forEach(book => {
+      if (book.id === id) Object.assign(book, updatedBook);
+    });
+  }
+
+  deleteBookByID(id: number): void {
+    const index = this.books.findIndex(book => book.id === id);
+    if (index !== -1) {
+      this.books.splice(index, 1);
+    }
   }
 
 }

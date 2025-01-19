@@ -3,24 +3,27 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BookService } from '../../services/book.service';
 import { ConversionService } from '../../services/conversion.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-book',
-  imports: [],
   templateUrl: './add-book.component.html',
-  styleUrl: './add-book.component.scss'
+  styleUrl: './add-book.component.scss',
+  standalone: false
 })
 export class AddBookComponent {
 
-  bookForm: FormGroup;
+  addbookForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private bookService: BookService,
     private conversionService: ConversionService,
+    private router: Router,
     private toastr: ToastrService
   ) {
-    this.bookForm = this.formBuilder.group({
+    this.addbookForm = this.formBuilder.group({
       name: ['', Validators.required],
       authors: this.formBuilder.array([this.formBuilder.control('', Validators.required)]),
       priceForNepal: [
@@ -31,7 +34,8 @@ export class AddBookComponent {
         null,
         [Validators.min(0), Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')],
       ],
-      publication: ['', Validators.pattern('^[a-zA-Z0-9 ]*$')],
+      //publication: ['', Validators.pattern('^[a-zA-Z0-9 ]*$')],
+      publication: ['']
     });
 
     this.onPriceChanges();
@@ -39,34 +43,46 @@ export class AddBookComponent {
   }
 
   get authors(): FormArray {
-    return this.bookForm.get('authors') as FormArray;
-    }
-    addAuthor(): void {
-    this.authors.push(this.fb.control('', Validators.required));
-    }
-    removeAuthor(index: number): void {
+    return this.addbookForm.get('authors') as FormArray;
+  }
+
+  addAuthor(): void {
+    this.authors.push(this.formBuilder.control('', Validators.required));
+  }
+
+  isAuthorInvalid(): boolean {
+    return this.authors.length === 0 || this.authors.controls.every(control => !control.value.trim());
+  }
+
+  removeAuthor(index: number): void {
     this.authors.removeAt(index);
-    }
-    onPriceChanges(): void {
-    this.bookForm.get('priceForNepal')?.valueChanges.subscribe((value) => {
-    if (value) {
-    const converted = this.bookService.convertPrice(value, true);
-    this.bookForm.patchValue({ priceForIndia: converted }, { emitEvent: false });
-    }
+  }
+
+  onPriceChanges(): void {
+    this.addbookForm.get('priceForNepal')?.valueChanges.subscribe((value) => {
+      if (value) {
+        const converted = this.conversionService.convertPrice(value, true);
+        this.addbookForm.patchValue({ priceForIndia: converted }, { emitEvent: false });
+      }
     });
-    this.bookForm.get('priceForIndia')?.valueChanges.subscribe((value) => {
-    if (value) {
-    const converted = this.bookService.convertPrice(value, false);
-    this.bookForm.patchValue({ priceForNepal: converted }, { emitEvent: false });
-    }
+    this.addbookForm.get('priceForIndia')?.valueChanges.subscribe((value) => {
+      if (value) {
+        const converted = this.conversionService.convertPrice(value, false);
+        this.addbookForm.patchValue({ priceForNepal: converted }, { emitEvent: false });
+      }
     });
+  }
+
+  submit(): void {
+    if (this.addbookForm.valid) {
+      const newBook = { ...this.addbookForm.value, id: Date.now() };
+      this.bookService.addBook(newBook);
+      this.toastr.success("Book added successfully.", "Success", { closeButton: true, timeOut: 1500, positionClass: 'toast-top-right' });
+      this.router.navigate(['/bookList']);
     }
-    submit(): void {
-    if (this.bookForm.valid) {
-    const newBook = { ...this.bookForm.value, id: Date.now() };
-    this.bookService.addBook(newBook);
-    this.router.navigate(['/']);
+    else{
+      this.toastr.error("Error occur while adding book.", "Error", { closeButton: true, timeOut: 2000, positionClass: 'toast-bottom-right' });
     }
-    }
+  }
 
 }
