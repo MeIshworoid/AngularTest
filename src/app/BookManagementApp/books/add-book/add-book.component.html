@@ -1,0 +1,18 @@
+<h2>Add a New Book</h2>
+<form [formGroup]="bookForm" (ngSubmit)="onsubmit()">
+<label>Name:</label>
+<input formControlName="name" />
+<div *ngIf="bookForm.get('name')?.touched && bookForm.get('name')?.invalid">
+Name is required.
+</div>
+<label>Authors:</label>
+<div formArrayName="authors">
+<div *ngFor="let author of authors.controls; let i = index">
+<input [formControlName]="i" />
+<button type="button" (click)="removeAuthor(i)">Remove</button>
+</div>
+<button type="button" (click)="addAuthor()">Add Author</button>
+</div>
+<div *ngIf="authors.invalid">At least one author is required.</div>
+<label>Price (NPR):</label>
+<input formControlName="priceForNepal" />

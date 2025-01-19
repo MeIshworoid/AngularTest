@@ -16,9 +16,13 @@ export const routes: Routes = [
     {path:'gamedata',component:GameDataComponent},
     {path:'gamedetails',component:GameDetailsComponent},
     {path:'loginForm',component:LoginFormComponent},
-    { path: '', redirectTo: '/loginForm', pathMatch: 'full' }
+    // { path: '', redirectTo: '/loginForm', pathMatch: 'full' }
 // {
 //     path: '',
 //     loadChildren: () => import('./Template Driven Form/module/tdf.module').then(m => m.TDFModule) //lazy loading
-// }
+// },
+{
+    path: '',
+    loadChildren: () => import('./BookManagementApp/books/books.module').then(m=>m.BooksModule)
+},
 ];
